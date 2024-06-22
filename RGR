@@ -1,0 +1,97 @@
+using System;
+
+public class Node
+{
+    public string Data { get; set; }
+    public Node Next { get; set; }
+
+    public Node(string data)
+    {
+        Data = data;
+        Next = null;
+    }
+}
+
+public class LinkedList
+{
+    private Node head;
+
+    public LinkedList()
+    {
+        head = null;
+    }
+
+    // Додавання елемента в кінець списку
+    public void Add(string data)
+    {
+        Node newNode = new Node(data);
+        if (head == null)
+        {
+            head = newNode;
+        }
+        else
+        {
+            Node current = head;
+            while (current.Next != null)
+            {
+                current = current.Next;
+            }
+            current.Next = newNode;
+        }
+    }
+
+    // Видалення елемента із заданим значенням
+    public void Remove(string data)
+    {
+        if (head == null) return;
+
+        if (head.Data.Equals(data))
+        {
+            head = head.Next;
+            return;
+        }
+
+        Node current = head;
+        while (current.Next != null)
+        {
+            if (current.Next.Data.Equals(data))
+            {
+                current.Next = current.Next.Next;
+                return;
+            }
+            current = current.Next;
+        }
+    }
+
+    // Видалення всього списку
+    public void Clear()
+    {
+        head = null;
+    }
+
+    // Видалення кінця списку починаючи із заданого елемента
+    public void RemoveFrom(string data)
+    {
+        Node current = head;
+        while (current != null && !current.Data.Equals(data))
+        {
+            current = current.Next;
+        }
+
+        if (current != null)
+        {
+            current.Next = null;
+        }
+    }
+
+    // Виведення списку
+    public void PrintList()
+    {
+        Node current = head;
+        while (current != null)
+        {
+            Console.WriteLine(current.Data);
+            current = current.Next;
+        }
+    }
+}
